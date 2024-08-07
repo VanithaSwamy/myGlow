@@ -1,0 +1,44 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+   Parlour Lists
+{% endblock title %}
+
+{% block content %}
+{% comment %} <h1>Product List</h1>
+  <ul>
+    {% for parlour in parlours %}
+      <li>{{ parlour.parlour_name }} - {{ parlour.address }} <img src="{{ parlour.parlour_image.url }}" alt="no image found"></li>
+      
+    {% endfor %}
+  </ul> {% endcomment %}
+    <div class="list-heading">
+        <h1 class="text-center">Parlour List</h1>
+    </div>
+  {% for parlour in parlours %}
+    <section id="list" class="list section-padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+              <div class="list-img">
+                <img src="{{ parlour.parlour_image.url}}" alt="parlour-image" width="300px" height="250px" />
+              </div>
+            </div>
+              <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-1">
+                <div class="list-text">
+                <h4 class="text-capitalize">{{ parlour.parlour_name }}</h4>
+                <p><span class="text-muted"> <i class="fa-solid fa-location-dot"></i> {{ parlour.address }}</span><br></p>
+                <p>{{ parlour.description }}</p>
+                <a href="{% url 'slist' parlour.parlour_name %}" class="btn btn-warning">View Services</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      {% endfor %}
+
+
+{% endblock content %}
+

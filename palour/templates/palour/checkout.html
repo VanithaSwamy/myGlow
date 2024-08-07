@@ -1,0 +1,115 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+    
+{% block title %}
+    CheckOut
+{% endblock title %}
+
+{% block content %}
+<div class="container section-padding">
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{msg}}
+            </div> 
+        {% endfor %}
+    {% endif %}
+   <div class="row mt-5">
+    <div class="col-sm-6">
+        <h4>Booking Summary : <span class="text-danger" id="parlorname">{{parlorname}}</span></h4>
+        <hr>
+        {% for item in cart_items %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5> Service:{{item.service.servicename}}</h5>
+                    <p>Quantity:{{item.quantity}}</p>
+                    <p class="fw-bold">Price:{{item.service.discounted_charges}}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <p class="fw-bold">Total cost + Rs.40={{totalamount}}</p>
+        <small>Term and condition:By making a booking for parlour services, you agree to the terms and conditions set forth by the parlour. The booking is considered confirmed once you receive a confirmation notification or email.</small>
+    </div>
+    <div class="col-sm-4 offset-sm-1">
+        <h4>Booking parlour Address</h4>    
+        <hr>
+        <form method="post" id="myform">
+            {% csrf_token %}
+                       
+            <div class="form-check mb-3">
+                <label for="totalamount" class="form-label">Booking Date</label>
+                <input type="date" class="form-control" id="bookingdate"/>
+            </div>
+            <div>
+                <span class="ms-4 me-2 mb-2">Select Time Slot : </span>
+                <select class="ps-3 pe-3 pt-1 pb-1 mb-2" id="timeslot">
+                    <option value='10:00-11:00'>10:00-11:00</option>
+                    <option value='11:00-12:00'>11:00-12:00</option>
+                    <option value='12:00-13:00'>12:00-13:00</option>
+                    <option value='13:00-14:00'>13:00-14:00</option>
+                    <option value='18:00-19:00'>18:00-19:00</option>
+                    <option value='19:00-20:00'>19:00-20:00</option>
+                    <option value='20:00-21:00'>20:00-21:00</option>
+                    <option value='21:00-22:00'>21:00-22:00</option>
+                </select>
+            <div class="form-check mb-3">
+                <label for="totalamount" class="form-label">Total Amount</label>
+                <input type="number" class="form-control" name="totalamount" value={{totalamount}} readonly>
+            </div>
+            <div class="text-end">
+                <button id="rzp-button1" type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Payment</button>
+            </div>
+        </form>
+   </div>
+</div>
+
+{% endblock content %}
+
+{% block payment-gateway %} 
+<script>
+    //document.getElementById('bookingdate').valueAsDate = new Date();
+    
+    var now = new Date();
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate()+1;
+    if (month < 10) 
+        month = "0" + month;
+    if (day < 10) 
+        day = "0" + day;
+    var today = now.getFullYear() + '-' + month + '-' + day;
+    console.log("date = ",today)
+    
+    document.getElementById("bookingdate").setAttribute("min",today)
+    document.getElementById('bookingdate').valueAsDate = new Date(today);
+    
+    var options = {
+        "key": "rzp_test_LxRqAytA5m1RfA", // Enter the Key ID generated from the Dashboard
+        "amount": "{{razoramount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "MyGlow Services",
+        "description": "Purchase Product",
+        "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+          console.log("success")
+          var slotid = document.getElementById("timeslot").value;
+          var date = document.getElementById("bookingdate").value;
+          var parlorname = "{{parlorname}}"
+            window.location.href = `http://localhost:8000/paymentdone?order_id=${response.razorpay_order_id}&payment_id=${response.razorpay_payment_id}&slot=${slotid}&parlorname=${parlorname}&date=${date}`
+          
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response){
+            alert(response.error.description);
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+      console.log("button click");
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+{% endblock payment-gateway %}

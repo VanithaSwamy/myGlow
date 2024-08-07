@@ -1,0 +1,42 @@
+{% extends 'palour/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome <span class="text-capitalize">{{user}}</span></h3>
+
+
+    <div class="col-sm-9 offset-sm-1">
+        {% for op in order_placed %}
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="{{op.service.images.url}}" class="img-fluid" height="100" width="100"/>
+            </div>
+            <div class="col-sm-7">
+                <p>Service : {{op.service}}</p>
+                <p>Parlor: {{op.parlourname.parlourname}}</p> 
+                <p>Date: {{op.booking_date}} {{op.Time_slot}}
+            </div>
+            <div class="col-sm-3">
+                <p> Order Status : {{op.status}} </p>
+                {% if op.status == 'confirmed' %}
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% endif %}
+                {% if op.status == 'cancelled' %}
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% endif %}
+                
+              
+            </div>
+        </div>
+        {% endfor %}
+    </div> 
+
+ </div>
+</div>
+{% endblock content %}

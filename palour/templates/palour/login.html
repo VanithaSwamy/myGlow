@@ -1,0 +1,49 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+<div class="container section-padding">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <h3 class="text-center">Login</h3>
+            {% if messages %}
+               {% for msg in messages %}
+                   {% if msg.tags == 'error' %}
+                       <div class="alert alert-danger" role="alert">
+                            {{msg}}
+                       </div>
+                   {% endif %}
+               {% endfor %}
+           {% endif %}
+            <form action="" method="post" novalidate class="shadow p-5">
+                {% csrf_token %}
+                {% for field in ln %}
+                   {{field.label_tag}} {{field}} <br><small class="text-danger"> {{field.errors|striptags}}</small><br>
+                {% endfor %}
+
+                {% comment %} {{ln.as_p}} {% endcomment %}
+           
+               <small><a href="#">Forgot Password</a></small> <br>
+               <input type="submit" class="btn btn-warning mt-4" value="Login">
+
+               <div class="text-center text-primary fw-bold">
+                <small>New User? <a href="#" class="text-danger"> Create an Account</a></small>
+               </div>
+               </form>
+
+            {% if fm.non_field_errors %}
+                {% for error in fm.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{error}} <br></p>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

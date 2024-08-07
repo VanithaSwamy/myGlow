@@ -1,0 +1,26 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+   Update
+{% endblock title %}
+
+{% block content %}
+<div class="update section-padding">
+    <div class="rows">
+        <div class="col-sm-6 offset-1 mx-auto">
+            <h5 class="alert alert-info">Update Service Information</h5>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-control">
+                    {% csrf_token %}
+                    {% for field in up %} 
+                    {{field.label_tag}} {{field}}  {{field.errors|striptags}} <br/>
+                    {% endfor %}  
+                <input type="submit" class="btn btn-success" value="Update">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

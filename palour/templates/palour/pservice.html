@@ -1,0 +1,63 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+    
+{% block title %}
+    services
+{% endblock title %}
+{% comment %} 
+        <br/>
+        {{val.charges}}
+    {% endfor %}
+     {% endcomment %}
+{% block content %}
+<div class="servicelist py-5" style="background:#f5f5f5">
+    <div class="container">
+      <!-- Row  -->
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <h3 class="mb-3">Our Services</h3>
+          <p class="text-muted f-17 mt-3">Vivamus ac nulla ultrices laoreet neque mollis mi morbi
+            elementum mauris
+            sit amet arcu <br> fringilla auctor In eleifend maximus nisi sed vulputate.</p>
+        </div>
+      </div>
+
+
+      {% for message in messages %}
+          <p class="alert alert-danger my-3">{{message}}</p>
+      {% endfor %}
+
+
+      <!-- Row  -->
+      <div class="row mt-4">
+        {% for val in  allsv %}
+        <div class="col-lg-4 mb-4">
+          <div class="card card-shadow border-1 mb-4 h-100 d-flex flex-column">
+            <img class="card-img-top" src="{{val.images.url}}" alt="service_imgs" height=200px width=100px/>
+            <div class="p-3">
+              <h4 class="font-weight-medium mb-0"> {{val.servicename}}</h4>
+              <p class="mt-2 text-muted">{{val.description}} </p>
+              <div class="d-flex mt-3 align-items-center">
+                <div class="pricing-plan mt-2 pt-2">
+                  <h5 class="text-muted"><s>{{val.charges}}</s> <span class="plan pl-3 text-dark">{{val.discounted_charges}}/-</span></h5>
+                </div>
+              </div>
+              <div class="mt-2 pt-3">
+                <form action="/add-to-cart" class="d-inline">
+                  <input type="hidden" name="service_id" value={{val.id}} />
+                  <button type="submit" class="btn btn-primary" style="position: absolute; bottom: 20px; left: 20px;">add to cart</button>
+                </form>
+                <a href="{% url 'showcart' %}" class="btn btn-outline-dark btn-rounded btn-mid" style="position: absolute; bottom: 20px; right: 20px;">Book Now</a>
+              </div>
+            </div>
+          </div>  
+        </div>
+        {% endfor %}
+      </div> 
+    </div> 
+  </div>
+   
+    
+    
+{% endblock content %}

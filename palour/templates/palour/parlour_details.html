@@ -1,0 +1,25 @@
+{% extends 'palour/base.html'%} 
+
+{% load static %} 
+
+{% block title %} Update Profile{%endblock title %}
+
+{% block content %}
+<div class="update section-padding">
+  <div class="rows">
+      <div class="col-sm-6 offset-1 mx-auto">
+          <h5 class="alert alert-info">Add Services</h5>
+          <form action="" method="post" enctype="multipart/form-data" novalidate> 
+              <div class="form-control">
+                {% csrf_token %}
+                {% for field in fm %} 
+                {{field.label_tag}} {{field}}  {{field.errors|striptags}} <br />
+                {% endfor %}        
+              <input type="submit" class="btn btn-success" value="Submit">
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+{% endblock content %}

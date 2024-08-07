@@ -1,0 +1,48 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+    status
+{% endblock title %}
+
+{% block content %}
+<div class="container section-padding">
+    <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 l-4">Client Approval Status</p>
+        <hr>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">User Name</th>
+        <th scope="col">Parlour Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {%for i in all_clientdetail%}
+        <tr>
+            <td>{{i.username}}</td>
+            <td>{{i.parlourname}}</td>
+            <td>{{i.location}}</td>
+            {% if i.status == 'pending' %}
+            <td><span class="badge text-bg-warning">Pending</span></td>
+            {% elif i.status == 'rejected' %}
+            <td><span class="badge text-bg-danger">Rejected</span></td>
+            {% else %}
+           <td><span class="badge text-bg-success">Accepted</span></td>
+            {% endif %}
+            </tr>
+         {%endfor%}
+      
+    </tbody>
+  </table>
+</div>
+</div>
+{%endblock%}
+
+
+
+                    

@@ -1,0 +1,61 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+     User Resgistration
+{% endblock title %}
+
+{% block content %}
+
+<div class="container section-padding">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <h3 class="text-center">User Resgistration </h3>
+            
+            <form action="" method="post" novalidate class="shadow p-5">
+                {% if messages %}
+            {% for msg in messages %}
+                {% if msg.tags == 'success' %}
+                    <div class="alert alert-info" role="alert">
+                        {{msg}}
+                    </div>
+                {% endif %}
+                {% if msg.tags == 'error' %}
+                    <div class="alert alert-danger" role="alert">
+                        {{msg}}
+                    </div>
+                {% endif %} 
+            {% endfor %}
+        {% endif %}
+
+          {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+            {% endfor %}
+          {% endif %}
+                {% csrf_token %}
+                {% for field in fm %}
+                {{field.label_tag}} {{field}}  <small class="text-danger">{{field.errors|striptags}}<br></small>
+                <br>
+              {% endfor %}
+      
+              {% comment %} {{fm.as_p}} {% endcomment %}
+      
+          <input type="submit" value="Submit" class="btn btn-warning">
+
+          <div class="text-center text-primary fw-bold">
+                <small>Existing User?<a href="{% url 'userlogin' %}"
+                    class="text-danger">Login Now</a></small>
+          </div>
+
+          
+          </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}
+

@@ -1,0 +1,7 @@
+root : Myglow  1234
+
+Customer:- vani123
+Pass:-V@101010
+
+Parlor:-Divine745
+Pass:-Divine@256

@@ -1,0 +1,50 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+    About Us
+{% endblock title %}
+
+
+{% block content %}
+
+<section="abt" class="abt">
+    <div class="container nt-3 section-padding">
+        <br>
+        <h2 class="text-center">About Us</h2>
+        <img src="{% static 'palour/images/g3.jpeg' %}" class="d-block w-100" class="d block h=20">      
+     <br>
+        <div class="row container">
+            <p class="fs-4 text-center">
+              Our committed and competent team is here to help keep your hair, nails, skin, and body healthy and beautiful.
+            In addition to our regular beauty services such as pedicures, manicures, and hair services we will continue
+            to perfect our skills and keep educated on all the latest styles.
+            Enjoy our wide range of services in a cozy and luxurious environment.
+            We look forward to serving you!
+            </p>
+        </div>
+        <br><br>
+        <div class="img_container">
+        <h2 class="text-center">Our Mission</h2>
+        <div class="images">
+            <img src="{% static 'palour/images/ab3.jpeg' %}" class="d-block w-50"> 
+        </div>
+        
+        </div>
+    
+    
+     <br>
+        <div class="row container">
+    
+            <p class="fs-4 text-center">
+                Our mission at Glow of Soul is to provide a friendly, personalized service through a team of
+                 highly skilled and creative professionals.
+                 Teamwork is our most valuable asset which ensures our clients are always number one,
+                  and we strive to exceed your expectations.
+     </p>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

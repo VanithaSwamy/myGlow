@@ -1,0 +1,49 @@
+{% extends 'palour/base.html'%}
+
+{% load static %}
+
+{% block title %}
+    Gallery
+{% endblock title %}
+
+{% block content %}
+
+  <section id="gallery" class="gallery section-padding">
+    <div class="images">
+        <div class="heading">
+          <h3>Our <span>Gallery</span></h3>
+        </div>
+        <div class="box">
+          
+          <div class="dream">
+            <img src="{% static 'palour/images/gallery/a.jpg' %}"alt=""/>
+            <img src="{% static 'palour/images/gallery/b.jpg' %}"alt=""/>
+            <img src="{% static 'palour/images/gallery/c.jpg' %}"alt=""/>
+            <img src="{% static 'palour/images/gallery/d.jpg' %}"alt=""/>
+            <img src="{% static 'palour/images/gallery/E.jpeg' %}"alt=""/>
+      </div>
+    
+            <div class="dream">
+                <img src="{% static 'palour/images/gallery/f.jpg' %}"alt=""/>S
+                <img src="{% static 'palour/images/gallery/g.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/h.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/i.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/j.jpg' %}"alt=""/>
+          </div>
+    
+            <div class="dream">
+                <img src="{% static 'palour/images/gallery/k.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/l.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/m.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/n.jpg' %}"alt=""/>
+                <img src="{% static 'palour/images/gallery/o.jpg' %}"alt=""/>     
+          </div>  
+    
+        </div>
+    
+    </div>
+
+  </section>
+ 
+
+{% endblock content %}
