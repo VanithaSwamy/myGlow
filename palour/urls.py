@@ -33,7 +33,7 @@ urlpatterns = [
     path('cart/',views.show_cart,name='showcart'), 
     path('booking/',views.booking_done,name='booking'), 
     path('checkout/',views.checkout.as_view(),name='checkout'), 
-    path('paymentdone/', views.payment_done, name='paymentdone'),
+    path('paymentdone/', views.payment_done, name='paymentdone'), 
 
     path('book/',views.booklist,name="blist"),
     path('tasks/<int:id>/', views.update_status, name='update_status'),
